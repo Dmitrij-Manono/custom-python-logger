@@ -9,12 +9,23 @@ import time
 # 'created': {'color': 'green'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}, 'levelname': {'color': 'white', 'bold': True}, 
 # 'levelno': {'color': 'white', 'bold': True}, 'exc_text': {'color': 'red'}, 'exc_info': {'color': 'red'}, 'stack_info': {'color': 'red'}}
 
-STREAM_WARNING_STYLES = {'levelname': {'color': 'yellow', 'bold': True}, 'levelno': {'color': 'yellow', 'bold': True}, 'exc_text': {'color': 'red'}, 'exc_info': {'color': 'red'}, 'stack_info': {'color': 'red'}}
-STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': True}, 'warning': {'color': 'yellow', 'bold': True}, 
-'error': {'color': 'red', 'bold': True}, 'debug': {'color': 'blue'}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'}, 
-'exception': {'color': 'red', 'bold': True, 'background': 'magenta'}, 'level 1337': {'color': 'magenta', 'bold': True}}
+STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 'cyan'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},
+ 'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},
+    'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
-SREAM_LOG_DEFAULT_FORMAT = '%(asctime)s %(levelname)s %(name)s %(filename)s:%(lineno)d %(funcName)s %(message)s, %(exc_info)s, %(stack_info)s, %(threadName)s, %(thread)d, %(process)d, %(processName)s, %(created)f, %(relativeCreated)d, %(msecs)d'
+
+STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': True}, 'warning': {'color': 'yellow', 'bold': True}, 
+'error': {'color': 'red', 'bold': True}, 'debug': {'color': 'blue','bald': True,'bright': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'}, 
+'exception': {'color': 'cyan', 'bold': True}, 'level 111': {'color': 'magenta', 'bold': True},}
+
+### STREAM log default format with time
+STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s   |%(name)s %(filename)s:%(funcName)s:%(lineno)d|'
+
+### TIME FORMAT ONLY TIME, SECONDS, MILLISECONDS
+STREAM_TIME_FORMAT = '%H:%M:%S.%f'
+### FILE LOG FORMAT WITH DATE AT THE START 
+FILE_LOG_DEFAULT_FORMAT = '%(asctime)s|%(relativeCreated)d-%(msecs)d|%(levelname)s|   %(message)s   |%(name)s %(filename)s:%(funcName)s:%(lineno)d, %(process)d, %(thread)d, %(threadName)s'
+
 
 class CustomFileLogger:
     def __init__(self, name='App_Logg', log_dir='logs', level=logging.DEBUG):
@@ -78,12 +89,13 @@ class CustomStreamLogger:
 
     def get_logger(self):
         logger = logging.getLogger(self.name)
-        #coloredlogs.DEFAULT_FIELD_STYLES = SREAM_LOG_DEFAULT_STYLES
         coloredlogs.DEFAULT_LEVEL_STYLES = STREAM_DEFAULT_LEVEL_STYLES
-        coloredlogs.DEFAULT_LOG_FORMAT = SREAM_LOG_DEFAULT_FORMAT
-        coloredlogs.install(level=self.level, logger=logger)
+        coloredlogs.DEFAULT_LOG_FORMAT = STREAM_LOG_DEFAULT_FORMAT
+        coloredlogs.DEFAULT_FIELD_STYLES = STREAM_DEFAULT_FIELD_STYLES
+        
+
+        coloredlogs.install(level=self.level, logger=logger, datefmt=STREAM_TIME_FORMAT)
         return logger
-    
     def info(self, msg):
         self.logger.info(msg)
     
@@ -110,7 +122,7 @@ class CustomStreamLogger:
         self.logger.setLevel(level)
     
     def alert(self, msg):
-        self.logger.log(level=1337, msg=msg)
+        self.logger.log(level=111, msg=msg)
     
     def get_level(self):
         return self.level
@@ -135,7 +147,7 @@ def main():
     stream_logger.critical("This is a stream logger")
 
     try:
-        raise Exception("This is a stream logger")
+        raise Exception("This is a test")
     except Exception as e:
         stream_logger.exception(e)
 
