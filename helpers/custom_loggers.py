@@ -127,8 +127,8 @@ def main():
     try :
         1/0
     except Exception as e:
-        logger.exception("This is an exception message" , exc_info=e)
-        pass
+        logger.exception(f"This is an exception message \'{e}\'") 
+        
 
 if __name__ == "__main__":
     main()
