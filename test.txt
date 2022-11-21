@@ -1,0 +1,15 @@
+    STREAM_DEFAULT_LOG_LEVEL = logging.DEBUG
+    STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 'cyan'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},
+    'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},
+        'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
+
+    STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 40, 'bold': True}, 'warning': {'color': 'yellow', 'bold': True}, 
+    'error': {'color': 196, 'bold': True}, 'debug': {'color': 51,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'}, 
+    'exception': {'color': 'cyan', 'bold': True}, 'alert': {'color': 166, 'bold': True}}
+
+    STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |%(filename)s|%(funcName)s|%(lineno)d|%(module)s|%(relativeCreated)d|%(msecs)d|'
+    STREAM_LOG_WARNING_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   | %(filename)s, %(funcName)s, %(lineno)d, %(module)s, %(relativeCreated)d, %(msecs)d|, %(message)s|'
+    STREAM_LOG_ALERT_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |'
+    STREAM_LOG_IMPORTANT_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |'
+    STREAM_LOG_EXCEPTION_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |'
+    STREAM_TIME_FORMAT = '%H:%M:%S.%f'

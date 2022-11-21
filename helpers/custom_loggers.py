@@ -2,157 +2,135 @@ import coloredlogs
 import logging
 import os
 import time
+import inspect
+import traceback
+import sys
 
-#SREAM_LOG_DEFAULT_STYLES = {'lineno': {'color': 'magenta'}, 'name': {'color': 'blue'}, 'levelname': {'color': 8},
-# 'funcName': {'color': 'cyan'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'yellow'}, 
-# 'module': {'color': 'blue'}, 'process': {'color': 'magenta'}, 'thread': {'color': 'magenta'}, 'threadName': {'color': 'magenta'}, 
-# 'created': {'color': 'green'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}, 'levelname': {'color': 'white', 'bold': True}, 
-# 'levelno': {'color': 'white', 'bold': True}, 'exc_text': {'color': 'red'}, 'exc_info': {'color': 'red'}, 'stack_info': {'color': 'red'}}
+######################################## Custom Console Logger ########################################
+STREAM_DEFAULT_LOG_LEVEL = logging.DEBUG
+STREAM_DEFAULT_LOG_NAME = "cli_Log"
+#DEFAULT FIELD STYLES
+STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 'cyan'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
+# FIELD STYLES FOR ALERT LEVEL
+STREAM_ALERT_FIELD_STYLES = {'lineno': {'color': 'red'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
-STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 'cyan'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},
- 'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},
-    'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
+# DEFAULT LEVEL STYLES
+STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 40, 'bold': True}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': True}, 'debug': {'color': 51,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 'cyan', 'bold': True}, 'alert': {'color': 166, 'bold': True}}
+# DEFAULT COMSOLE LOG FORMAT
+STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |%(filename)s|%(funcName)s|%(lineno)d|%(module)s|%(relativeCreated)d|%(msecs)d|'
+# FORMAT FOR WARNING LEVEL
+STREAM_LOG_WARNING_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   | %(filename)s, %(funcName)s, %(lineno)d, %(module)s, %(relativeCreated)d, %(msecs)d|, %(message)s|'
+# FORMAT FOR ALERT LEVEL
+STREAM_LOG_ALERT_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |'
+# FORMAT FOR IMPORTANT LEVEL
+STREAM_LOG_IMPORTANT_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |'
+# FORMAT FOR EXCEPTION LEVEL
+STREAM_LOG_EXCEPTION_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |'
+# FORMAT FOR ERROR LEVEL
+STREAM_LOG_ERROR_FORMAT = '|%(asctime)s|%(name)s|%(levelname)s|   %(message)s   |, %(lineno)d, %(lineno)d'
+STREAM_DEFAULT_TIME_FORMAT = '%H:%M:%S.%f'
 
+######################################## Custom File Logger ########################################
 
-STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': True}, 'warning': {'color': 'yellow', 'bold': True}, 
-'error': {'color': 'red', 'bold': True}, 'debug': {'color': 'blue','bald': True,'bright': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'}, 
-'exception': {'color': 'cyan', 'bold': True}, 'level 111': {'color': 'magenta', 'bold': True},}
+DEFAULT_LOG_DIR = "logs"
 
-### STREAM log default format with time
-STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s   |%(name)s %(filename)s:%(funcName)s:%(lineno)d|'
-
-### TIME FORMAT ONLY TIME, SECONDS, MILLISECONDS
-STREAM_TIME_FORMAT = '%H:%M:%S.%f'
-### FILE LOG FORMAT WITH DATE AT THE START 
-FILE_LOG_DEFAULT_FORMAT = '%(asctime)s|%(relativeCreated)d-%(msecs)d|%(levelname)s|   %(message)s   |%(name)s %(filename)s:%(funcName)s:%(lineno)d, %(process)d, %(thread)d, %(threadName)s'
-
-
-class CustomFileLogger:
-    def __init__(self, name='App_Logg', log_dir='logs', level=logging.DEBUG):
-        self.name = name
-        self.log_dir = log_dir
-        self.level = level
-        self.logger = self.get_logger()
-
-    def get_logger(self):
-        logger = logging.getLogger(self.name)
-        logger.setLevel(self.level)
-        if not os.path.exists(self.log_dir):
-            os.makedirs(self.log_dir)
-        log_file = os.path.join(self.log_dir, f"{self.name}_{time.strftime('_%Y-%m-%d')}.log")
-        fh = logging.FileHandler(log_file)
-        fh.setLevel(self.level)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
-        return logger
-
-    def info(self, msg):
-        self.logger
-    
-    def warning(self, msg):
-        self.logger.warning(msg)
-    
-    def error(self, msg):
-        self.logger.error(msg)
-    
-    def debug(self, msg):
-        self.logger.debug(msg)
-    
-    def critical(self, msg):
-        self.logger.critical(msg)
-    
-    def exception(self, msg):
-        self.logger.exception(msg)
-    
-    def log(self, level, msg):
-        self.logger.log(level, msg)
-    
-    def set_level(self, level):
-        self.level = level
-        self.logger.setLevel(level)
-
-    
-    def get_level(self):
-        return self.level
-    
+FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+FILE_LOG_DEFAULT_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s   |%(name)s %(filename)s:%(funcName)s:%(lineno)d, %(process)d, %(thread)d, %(threadName)s, %(processName)s|'
 
 
-    
+# Class ConsoleLogger returns a logger for class calling it, logger is logging only to console, with different styles
+# class ConsoleLogger has custom methods for logging at different levels
+# inspect.stack() will be used to get correct caller name, line number, file name, function name etc
+
+class ConsoleLogger():
+    def __init__(self, log_level=STREAM_DEFAULT_LOG_LEVEL, log_name=STREAM_DEFAULT_LOG_NAME, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES, log_format=STREAM_LOG_DEFAULT_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT):
+        self.log_level = log_level
+        self.log_name = log_name
+        self.field_styles = field_styles
+        self.level_styles = level_styles
+        self.log_format = log_format
+        self.time_format = time_format
+        self.logger = logging.getLogger(self.log_name)
+        # add alert level
+        logging.addLevelName(100, "ALERT")
+        logging.addLevelName(200, "IMPORTANT")
+        logging.addLevelName(300, "EXCEPTION")
+        self.logger.setLevel(self.log_level)
+        self.stream_handler = logging.StreamHandler()
+        self.stream_handler.setLevel(self.log_level)
+        self.stream_formatter = coloredlogs.ColoredFormatter(fmt=self.log_format, field_styles=self.field_styles, level_styles=self.level_styles, datefmt=self.time_format)
+        self.stream_handler.setFormatter(self.stream_formatter)
+        self.logger.addHandler(self.stream_handler)
+        self.logger.propagate = False
 
 
-class CustomStreamLogger:
-    def __init__(self, name, level=logging.DEBUG):
-        self.name = name
-        self.level = level
-        self.logger = self.get_logger()
-
-    def get_logger(self):
-        logger = logging.getLogger(self.name)
-        coloredlogs.DEFAULT_LEVEL_STYLES = STREAM_DEFAULT_LEVEL_STYLES
-        coloredlogs.DEFAULT_LOG_FORMAT = STREAM_LOG_DEFAULT_FORMAT
-        coloredlogs.DEFAULT_FIELD_STYLES = STREAM_DEFAULT_FIELD_STYLES
-        
-
-        coloredlogs.install(level=self.level, logger=logger, datefmt=STREAM_TIME_FORMAT)
-        return logger
-    def info(self, msg):
-        self.logger.info(msg)
-    
-    def warning(self, msg):
-        self.logger.warning(msg)
-    
-    def error(self, msg):
-        self.logger.error(msg)
-    
-    def debug(self, msg):
-        self.logger.debug(msg)
-    
-    def critical(self, msg):
-        self.logger.critical(msg)
-    
-    def exception(self, msg):
-        self.logger.exception(msg)
-    
-    def log(self, level, msg):
-        self.logger.log(level, msg)
-    
-    def set_level(self, level):
-        self.level = level
-        self.logger.setLevel(level)
-    
-    def alert(self, msg):
-        self.logger.log(level=111, msg=msg)
-    
-    def get_level(self):
-        return self.level
-    
+    # creates new record for logger with file name, function name, line number, message, level etc
+    # addes exception type error to record if exception is passed
+    def create_record(self, msg, level, exception=None):
+        stack = inspect.stack()
+        record = logging.LogRecord(name=self.log_name, level=level, pathname=stack[2][1], lineno=stack[2][2], msg=msg, args=None, exc_info=exception, func=stack[2][3])
+        return record
 
 
 
+    def info(self, msg, *args, **kwargs):
+        record = self.create_record(msg, logging.INFO)
+        self.logger.handle(record)
+
+    def warning(self, msg, *args, **kwargs):
+        record = self.create_record(msg, logging.WARNING)
+        self.logger.handle(record)
     
+    def error(self, msg, *args, **kwargs):
+        record = self.create_record(msg, logging.ERROR)
+        self.logger.handle(record)
+
+    def debug(self, msg, *args, **kwargs):
+        record = self.create_record(msg, logging.DEBUG)
+        self.logger.handle(record)
+
+    def critical(self, msg, *args, **kwargs):
+        record = self.create_record(msg, logging.CRITICAL)
+        self.logger.handle(record)
+
+    def alert(self, msg, *args, **kwargs):
+        record = self.create_record(level=100, msg=msg)
+        self.logger.handle(record)
+
+    def important(self, msg, *args, **kwargs):
+        record = self.create_record(level=200, msg=msg)
+        self.logger.handle(record)
+    
+    # exception level is used for logging exceptions
+    # prints exception type, exception message
+    def exception(self, msg, *args, **kwargs):
+        record = self.create_record(level=300, msg=msg, exception=sys.exc_info())
+        self.logger.handle(record)
+    
+
+    
+
+
 
 
 
 def main():
-    file_logger = CustomFileLogger("file_logger", "logs")
-    stream_logger = CustomStreamLogger("stream_logger")
-
-
-    stream_logger.info("This is a stream logger")
-    stream_logger.alert("This is a stream TEST")
-    stream_logger.warning("This is a stream logger")
-    stream_logger.error("This is a stream logger")
-    stream_logger.debug("This is a stream logger")
-    stream_logger.critical("This is a stream logger")
-
-    try:
-        raise Exception("This is a test")
+    logger = ConsoleLogger()
+    logger.info("This is an info message")
+    logger.warning("This is a warning message")
+    logger.alert("This is an alert message")
+    logger.important("This is an important message")
+    logger.error("This is an error message")
+    logger.debug("This is a debug message")
+    logger.critical("This is a critical message")
+    #print(logger.find_caller())
+    try :
+        1/0
     except Exception as e:
-        stream_logger.exception(e)
-
-       
-
+        logger.exception("This is an exception message" , exc_info=e)
+        pass
 
 if __name__ == "__main__":
     main()
+
+
