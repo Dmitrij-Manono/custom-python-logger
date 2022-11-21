@@ -15,12 +15,11 @@ STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 127}, 'name': {'color': 'blac
 STREAM_ALERT_FIELD_STYLES = {'lineno': {'color': 'red'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
 # DEFAULT LEVEL STYLES
-STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 166, 'bold': True}, 'important': {'color': 40, 'bold': True}}
+STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 166, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'input_required': {'color': 213, 'bold': True}, 'message': {'bold': True}}
 # DEFAULT COMSOLE LOG FORMAT
 STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s   |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 # FORMAT FOR ALERT LEVEL
-STREAM_LOG_ALERT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s'
-STREAM_LOG_IMPORTANT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s'
+STREAM_LOG_LESSINFO_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s'
 
 STREAM_DEFAULT_TIME_FORMAT = '%H:%M:%S.%f'
 
@@ -45,10 +44,11 @@ class ConsoleLogger():
         self.log_format = log_format
         self.time_format = time_format
         self.logger = logging.getLogger(self.log_name)
-        # add alert level
-        logging.addLevelName(100, "ALERT")
-        logging.addLevelName(200, "IMPORTANT")
-        logging.addLevelName(300, "EXCEPTION")
+        logging.addLevelName(35, "ALERT")
+        logging.addLevelName(25, "IMPORTANT")
+        logging.addLevelName(45, "EXCEPTION")
+        logging.addLevelName(200, "MESSAGE")
+        logging.addLevelName(300, "INPUT_REQUIRED")
         self.logger.setLevel(self.log_level)
         self.stream_handler = logging.StreamHandler()
         self.stream_handler.setLevel(self.log_level)
@@ -56,7 +56,6 @@ class ConsoleLogger():
         self.stream_handler.setFormatter(self.stream_formatter)
         self.logger.addHandler(self.stream_handler)
         self.logger.propagate = False
-
 
     # set colored formatter to default format
     def set_default_formatter(self):
@@ -95,7 +94,6 @@ class ConsoleLogger():
         self.log_name = name
         self.logger = logging.getLogger(self.log_name)
     
-
     # creates new record for logger with file name, function name, line number, message, level etc
     # addes exception type error to record if exception is passed
     def create_record(self, msg, level, exception=None):
@@ -124,27 +122,37 @@ class ConsoleLogger():
         self.logger.handle(record)
 
     def important(self, msg, *args, **kwargs):
-        record = self.create_record(level=200, msg=msg)
-        self.set_colored_formatter_format(STREAM_LOG_IMPORTANT_FORMAT)
+        record = self.create_record(level=25, msg=msg)
+        self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
         self.logger.handle(record)
         self.set_default_formatter()
     
     # exception level is used for logging exceptions
     # prints exception type, exception message
     def exception(self, msg, *args, **kwargs):
-        record = self.create_record(level=300, msg=msg, exception=sys.exc_info())
+        record = self.create_record(level=45, msg=msg, exception=sys.exc_info())
         self.logger.handle(record)
     
     # alert level is used for logging alerts with different style format
     def alert(self, msg, *args, **kwargs):
-        record = self.create_record(level=100, msg=msg)
+        record = self.create_record(level=35, msg=msg)
         # change output format for alert level
-        self.set_colored_formatter_format(STREAM_LOG_ALERT_FORMAT)
+        self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
         self.logger.handle(record)
         # change output format back to default
         self.set_default_formatter()
     
-
+    def input_required(self, msg, *args, **kwargs):
+        record = self.create_record(level=300, msg=msg)
+        self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
+        self.logger.handle(record)
+        self.set_default_formatter()
+    
+    def message(self, msg, *args, **kwargs):
+        record = self.create_record(level=200, msg=msg)
+        self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
+        self.logger.handle(record)
+        self.set_default_formatter()
 
 
 
@@ -158,6 +166,8 @@ def main():
     logger.error("This is an error message")
     logger.debug("This is a debug message")
     logger.critical("This is a critical message")
+    logger.input_required("This is an input required message")
+    logger.message("This is a message")
     #print(logger.find_caller())
     try :
         1/0
