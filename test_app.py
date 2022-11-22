@@ -1,9 +1,9 @@
-from helpers.custom_loggers import ConsoleLogger
+from helpers.custom_logger import CustomLogger
 
 
 
-stream_logger = ConsoleLogger()
-stream_logger.add_file_handler()
+stream_logger = CustomLogger()
+stream_logger.create_file_handler()
 stream_logger.info("This is an info2 message")
 
 

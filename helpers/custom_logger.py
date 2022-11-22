@@ -1,6 +1,6 @@
 import coloredlogs
 import logging
-#import os
+import os
 import time
 import inspect
 #import traceback
@@ -61,20 +61,36 @@ class CustomLogger():
         self.stream_handler.setFormatter(self.stream_formatter)
         self.logger.addHandler(self.stream_handler)
         self.logger.propagate = False
+        # file handler variables
+        self.file_handler = None
+        self.file_formatter = None
+        self.file_log_dir = None
+        self.file_log_name = None
+        self.file_log_level = None
+        self.file_log_format = None
+        self.file_time_format = None
 
-    def add_file_handler(self, log_dir=DEFAULT_FILE_LOG_DIR, log_name=DEFAULT_FILE_LOG_NAME, log_level=DEFAULT_FILE_LOG_LEVEL, log_format=DEFAULT_FILE_LOG_FORMAT, time_format=DEFAULT_FILE_TIME_FORMAT):
-        self.log_dir = log_dir
-        self.log_name = log_name
-        self.log_level = log_level
-        self.log_format = log_format
-        self.time_format = time_format
-        self.file_handler = logging.FileHandler(filename=self.log_dir + "/" + self.log_name + "_" + datetime.datetime.now().strftime("%Y-%m-%d") + ".log")
-        self.file_handler.setLevel(self.log_level)
-        self.file_formatter = logging.Formatter(fmt=self.log_format, datefmt=self.time_format)
+
+    # create_file_handler method creates a file handler for logger and adds it to logger
+    # checks if file handler already exists, if yes, removes it and creates a new one
+    # checks if directory or file exists, if not, creates them, adds date to file name
+
+    def create_file_handler(self, log_dir=DEFAULT_FILE_LOG_DIR, log_name=DEFAULT_FILE_LOG_NAME, log_level=DEFAULT_FILE_LOG_LEVEL, log_format=DEFAULT_FILE_LOG_FORMAT, time_format=DEFAULT_FILE_TIME_FORMAT):
+        self.file_log_dir = log_dir
+        self.file_log_name = log_name
+        self.file_log_level = log_level
+        self.file_log_format = log_format
+        self.file_time_format = time_format
+        if self.file_handler:
+            self.logger.removeHandler(self.file_handler)
+        if not os.path.exists(self.file_log_dir):
+            os.makedirs(self.file_log_dir)
+        self.file_handler = logging.FileHandler(os.path.join(self.file_log_dir, self.file_log_name + "_" + datetime.datetime.now().strftime("%Y-%m-%d") + ".log"))
+        self.file_handler.setLevel(self.file_log_level)
+        self.file_formatter = logging.Formatter(fmt=self.file_log_format, datefmt=self.file_time_format)
         self.file_handler.setFormatter(self.file_formatter)
         self.logger.addHandler(self.file_handler)
 
-    
     
 
 
@@ -98,12 +114,6 @@ class CustomLogger():
         self.logger.setLevel(level)
         self.stream_handler.setLevel(level)
     
-    # set new formatter for all levels
-    def set_formatter_all(self, log_format, time_format):
-        self.log_format = log_format
-        self.time_format = time_format
-        self.stream_formatter = logging.Formatter(fmt=self.log_format, datefmt=self.time_format)
-        self.stream_handler.setFormatter(self.stream_formatter)
     
     # set new log level
     def set_level(self, level):
