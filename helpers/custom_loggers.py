@@ -1,16 +1,18 @@
 import coloredlogs
 import logging
 #import os
-#import time
+import time
 import inspect
 #import traceback
 import sys
+import datetime
+
 
 ######################################## Custom Console Logger ########################################
 STREAM_DEFAULT_LOG_LEVEL = logging.DEBUG
 STREAM_DEFAULT_LOG_NAME = "cli_Log"
 #DEFAULT FIELD STYLES
-STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 127}, 'name': {'color': 'black'}, 'levelname': {'color': 195, 'bold': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'black', 'bold': True}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'black'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
+STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 127}, 'name': {'color': 'black'}, 'levelname': {'color': 180, 'bold': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'black', 'bold': True}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'black'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 # FIELD STYLES FOR ALERT LEVEL
 STREAM_ALERT_FIELD_STYLES = {'lineno': {'color': 'red'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
@@ -25,10 +27,13 @@ STREAM_DEFAULT_TIME_FORMAT = '%H:%M:%S.%f'
 
 ######################################## Custom File Logger ########################################
 
-DEFAULT_LOG_DIR = "logs"
+DEFAULT_FILE_LOG_DIR = "logs"
+DEFAULT_FILE_LOG_NAME = "app.Log"
+DEFAULT_FILE_LOG_LEVEL = logging.DEBUG
+DEFAULT_FILE_LOG_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s    |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 
 FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
-FILE_LOG_DEFAULT_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s   |%(name)s %(filename)s:%(funcName)s:%(lineno)d, %(process)d, %(thread)d, %(threadName)s, %(processName)s|'
+
 
 
 # Class ConsoleLogger returns a logger for class calling it, logger is logging only to console, with different styles
@@ -153,7 +158,6 @@ class ConsoleLogger():
         self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
         self.logger.handle(record)
         self.set_default_formatter()
-
 
 
 
