@@ -28,11 +28,11 @@ STREAM_DEFAULT_TIME_FORMAT = '%H:%M:%S.%f'
 ######################################## Custom File Logger ########################################
 
 DEFAULT_FILE_LOG_DIR = "logs"
-DEFAULT_FILE_LOG_NAME = "app.Log"
+DEFAULT_FILE_LOG_NAME = "app_Log"
 DEFAULT_FILE_LOG_LEVEL = logging.DEBUG
 DEFAULT_FILE_LOG_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s    |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 
-FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+DEFAULT_FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
 
@@ -40,7 +40,7 @@ FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 # class ConsoleLogger has custom methods for logging at different levels
 # inspect.stack() will be used to get correct caller name, line number, file name, function name etc
 
-class ConsoleLogger():
+class CustomLogger():
     def __init__(self, log_level=STREAM_DEFAULT_LOG_LEVEL, log_name=STREAM_DEFAULT_LOG_NAME, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES, log_format=STREAM_LOG_DEFAULT_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT):
         self.log_level = log_level
         self.log_name = log_name
@@ -61,6 +61,22 @@ class ConsoleLogger():
         self.stream_handler.setFormatter(self.stream_formatter)
         self.logger.addHandler(self.stream_handler)
         self.logger.propagate = False
+
+    def add_file_handler(self, log_dir=DEFAULT_FILE_LOG_DIR, log_name=DEFAULT_FILE_LOG_NAME, log_level=DEFAULT_FILE_LOG_LEVEL, log_format=DEFAULT_FILE_LOG_FORMAT, time_format=DEFAULT_FILE_TIME_FORMAT):
+        self.log_dir = log_dir
+        self.log_name = log_name
+        self.log_level = log_level
+        self.log_format = log_format
+        self.time_format = time_format
+        self.file_handler = logging.FileHandler(filename=self.log_dir + "/" + self.log_name + "_" + datetime.datetime.now().strftime("%Y-%m-%d") + ".log")
+        self.file_handler.setLevel(self.log_level)
+        self.file_formatter = logging.Formatter(fmt=self.log_format, datefmt=self.time_format)
+        self.file_handler.setFormatter(self.file_formatter)
+        self.logger.addHandler(self.file_handler)
+
+    
+    
+
 
     # set colored formatter to default format
     def set_default_formatter(self):
@@ -162,7 +178,7 @@ class ConsoleLogger():
 
 
 def main():
-    logger = ConsoleLogger()
+    logger = CustomLogger()
     logger.info("This is an info message")
     logger.warning("This is a warning message")
     logger.alert("This is an alert message")

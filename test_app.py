@@ -3,6 +3,7 @@ from helpers.custom_loggers import ConsoleLogger
 
 
 stream_logger = ConsoleLogger()
+stream_logger.add_file_handler()
 stream_logger.info("This is an info2 message")
 
 
