@@ -86,3 +86,17 @@ Exception: This is a test
 2022-11-22 16:53:21|DEBUG|   This is a debug message    |test_app2.py|<module>|14|test_app2|
 2022-11-22 16:53:21|CRITICAL|   This is a critical message    |test_app2.py|<module>|15|test_app2|
 2022-11-22 16:53:21|INPUT_REQUIRED|   This is an input required message    |test_app2.py|<module>|16|test_app2|
+2022-11-22 17:15:27|INFO|   This is an info2 message    |test_app.py|<module>|7|cli_Log|
+2022-11-22 17:15:27|INFO|   This is an info message    |test_app.py|main|12|cli_Log|
+2022-11-22 17:15:27|ALERT|   This is an alert message    |test_app.py|main|13|cli_Log|
+2022-11-22 17:15:27|IMPORTANT|   This is a stream logger    |test_app.py|main|14|cli_Log|
+2022-11-22 17:15:27|WARNING|   This is a stream logger    |test_app.py|main|15|cli_Log|
+2022-11-22 17:15:28|ERROR|   This is a stream logger    |test_app.py|main|16|cli_Log|
+2022-11-22 17:15:28|DEBUG|   This is a stream logger    |test_app.py|main|17|cli_Log|
+2022-11-22 17:15:28|CRITICAL|   This is a stream logger    |test_app.py|main|18|cli_Log|
+2022-11-22 17:15:28|EXCEPTION|   This is a test    |test_app.py|main|23|cli_Log|
+Traceback (most recent call last):
+  File "g:\_Manono_USER\Manono\Desktop\git\custom_logger_python\test_app.py", line 21, in main
+    raise Exception("This is a test")
+Exception: This is a test
+2022-11-22 17:15:28|INFO|   This is an info message    |test_app.py|test|30|cli_Log|

@@ -1,5 +1,9 @@
 import coloredlogs
 import logging
+from logging.handlers import SysLogHandler
+import logging.handlers
+# import socket for syslog handler
+import socket
 import os
 import time
 import inspect
@@ -31,9 +35,7 @@ DEFAULT_FILE_LOG_DIR = "logs"
 DEFAULT_FILE_LOG_NAME = "app_Log"
 DEFAULT_FILE_LOG_LEVEL = logging.DEBUG
 DEFAULT_FILE_LOG_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s    |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
-
 DEFAULT_FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
-
 
 
 # Class ConsoleLogger returns a logger for class calling it, logger is logging only to console, with different styles
@@ -90,8 +92,6 @@ class CustomLogger():
         self.file_formatter = logging.Formatter(fmt=self.file_log_format, datefmt=self.file_time_format)
         self.file_handler.setFormatter(self.file_formatter)
         self.logger.addHandler(self.file_handler)
-
-    
 
 
     # set colored formatter to default format

@@ -6,6 +6,7 @@ test_app.main()
 
 log = CustomLogger(log_name="test_app2")
 log.create_file_handler()
+log.create_syslog_handler()
 log.info("This is an info message")
 log.warning("This is a warning message")
 log.alert("This is an alert message")
