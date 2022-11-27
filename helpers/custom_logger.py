@@ -1,11 +1,7 @@
 import coloredlogs
 import logging
-from logging.handlers import SysLogHandler
 import logging.handlers
-# import socket for syslog handler
-import socket
 import os
-import time
 import inspect
 #import traceback
 import sys
@@ -21,7 +17,7 @@ STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 127}, 'name': {'color': 'blac
 STREAM_ALERT_FIELD_STYLES = {'lineno': {'color': 'red'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
 # DEFAULT LEVEL STYLES
-STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 166, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'user_input': {'color': 213, 'bold': True}, 'message': {'bold': True}}
+STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 166, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'user_input': {'color': 200, 'bold': True}, 'message': {'bold': True}, 'action_required': {'color': 99, 'bold': True}}
 # DEFAULT COMSOLE LOG FORMAT
 STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s   |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 # FORMAT FOR ALERT LEVEL
@@ -55,6 +51,7 @@ class CustomLogger():
         logging.addLevelName(25, "IMPORTANT")
         logging.addLevelName(45, "EXCEPTION")
         logging.addLevelName(200, "MESSAGE")
+        logging.addLevelName(150, "ACTION_REQUIRED")
         logging.addLevelName(15, "USER_INPUT")
         self.logger.setLevel(self.log_level)
         self.stream_handler = logging.StreamHandler()
@@ -175,15 +172,18 @@ class CustomLogger():
     
     def user_input(self, msg, *args, **kwargs):
         record = self.create_record(level=15, msg=msg)
-        self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
         self.logger.handle(record)
-        self.set_default_formatter()
+        
     
     def message(self, msg, *args, **kwargs):
         record = self.create_record(level=200, msg=msg)
         self.set_colored_formatter_format(STREAM_LOG_LESSINFO_FORMAT)
         self.logger.handle(record)
         self.set_default_formatter()
+    
+    def action_required(self, msg, *args, **kwargs):
+        record = self.create_record(level=150, msg=msg)
+        self.logger.handle(record)
 
 
 
@@ -199,6 +199,7 @@ def main():
     logger.user_input("This is an input required message")
     logger.message("This is a message")
     logger.user_input("This is an input required message")
+    logger.action_required("This is an action required message")
     #print(logger.find_caller())
     try :
         1/0
