@@ -1,0 +1,45 @@
+2022-11-30 09:14:29|USER_INPUT|   user input    |custom_log.py|main|165|cli_Log|
+2022-11-30 09:14:29|ALERT|   alert    |custom_log.py|main|166|cli_Log|
+2022-11-30 09:14:29|IMPORTANT|   important    |custom_log.py|main|167|cli_Log|
+2022-11-30 09:14:29|ACTION_REQUIRED|   action required    |custom_log.py|main|168|cli_Log|
+2022-11-30 09:14:29|MESSAGE|   message    |custom_log.py|main|169|cli_Log|
+2022-11-30 09:14:29|INFO|   info    |custom_log.py|main|170|cli_Log|
+2022-11-30 09:14:29|DEBUG|   debug    |custom_log.py|main|171|cli_Log|
+2022-11-30 09:14:29|WARNING|   warning    |custom_log.py|main|172|cli_Log|
+2022-11-30 09:14:29|ERROR|   error    |custom_log.py|main|173|cli_Log|
+2022-11-30 09:14:29|CRITICAL|   critical    |custom_log.py|main|174|cli_Log|
+2022-11-30 09:14:29|EXCEPTION|   test    |custom_log.py|main|179|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 177, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 09:14:52|INFO|   This is a test    |test_app2.py|test_custom_log|6|cli_Log|
+2022-11-30 09:14:52|DEBUG|   This is a test    |test_app2.py|test_custom_log|7|cli_Log|
+2022-11-30 09:14:52|WARNING|   This is a test    |test_app2.py|test_custom_log|8|cli_Log|
+2022-11-30 09:14:52|ERROR|   This is a test    |test_app2.py|test_custom_log|9|cli_Log|
+2022-11-30 09:14:52|CRITICAL|   This is a test    |test_app2.py|test_custom_log|10|cli_Log|
+2022-11-30 09:14:52|USER_INPUT|   This is a test    |test_app2.py|test_custom_log|11|cli_Log|
+2022-11-30 09:14:52|ACTION_REQUIRED|   This is a test    |test_app2.py|test_custom_log|12|cli_Log|
+2022-11-30 09:14:52|ALERT|   This is a test    |test_app2.py|test_custom_log|13|cli_Log|
+2022-11-30 09:14:52|IMPORTANT|   This is a test    |test_app2.py|test_custom_log|14|cli_Log|
+2022-11-30 09:14:52|MESSAGE|   This is a test    |test_app2.py|test_custom_log|15|cli_Log|
+2022-11-30 09:14:52|EXCEPTION|   This is an exception    |test_app2.py|test_custom_log|21|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/test_app2.py", line 19, in test_custom_log
+    raise Exception('This is an exception')
+Exception: This is an exception
+2022-11-30 09:14:52|INFO|   This is a test    |test_app.py|test_custom_log|6|cli_Log|
+2022-11-30 09:14:52|DEBUG|   This is a test    |test_app.py|test_custom_log|7|cli_Log|
+2022-11-30 09:14:52|WARNING|   This is a test    |test_app.py|test_custom_log|8|cli_Log|
+2022-11-30 09:14:52|ERROR|   This is a test    |test_app.py|test_custom_log|9|cli_Log|
+2022-11-30 09:14:52|CRITICAL|   This is a test    |test_app.py|test_custom_log|10|cli_Log|
+2022-11-30 09:14:52|USER_INPUT|   This is a test    |test_app.py|test_custom_log|11|cli_Log|
+2022-11-30 09:14:52|ACTION_REQUIRED|   This is a test    |test_app.py|test_custom_log|12|cli_Log|
+2022-11-30 09:14:52|ALERT|   This is a test    |test_app.py|test_custom_log|13|cli_Log|
+2022-11-30 09:14:52|IMPORTANT|   This is a test    |test_app.py|test_custom_log|14|cli_Log|
+2022-11-30 09:14:52|MESSAGE|   This is a test    |test_app.py|test_custom_log|15|cli_Log|
+2022-11-30 09:14:52|EXCEPTION|   This is a test    |test_app.py|test_custom_log|20|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/test_app.py", line 18, in test_custom_log
+    raise Exception("This is a test")
+Exception: This is a test

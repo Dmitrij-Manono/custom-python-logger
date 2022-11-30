@@ -1,37 +1,25 @@
-from helpers.custom_logger import CustomLogger
+from helpers.custom_log import CustomLog
 
 
+def test_custom_log():
+    log = CustomLog()
+    log.info("This is a test")
+    log.debug("This is a test")
+    log.warning("This is a test")
+    log.error("This is a test")
+    log.critical("This is a test")
+    log.user_input("This is a test")
+    log.action_required("This is a test")
+    log.alert("This is a test")
+    log.important("This is a test")
+    log.message("This is a test")
 
-stream_logger = CustomLogger()
-stream_logger.create_file_handler()
-stream_logger.info("This is an info2 message")
-
-
-
-def main():
-    stream_logger.info("This is an info message")
-    stream_logger.alert("This is an alert message")
-    stream_logger.important("This is a stream logger")
-    stream_logger.warning("This is a stream logger")
-    stream_logger.error("This is a stream logger")
-    stream_logger.debug("This is a stream logger")
-    stream_logger.critical("This is a stream logger")
-    #print(stream_logger.custom_find_caller())
     try:
         raise Exception("This is a test")
     except Exception as e:
-        stream_logger.exception(e)
-    #<class 'inspect.FrameInfo'>
-    #print(stream_logger.find_caller())
-    test()
+        log.exception(e)
+        
 
-
-def test():
-    stream_logger.info("This is an info message")
+if __name__ == '__main__':
+    test_custom_log()
     
-
-if __name__ == "__main__":
-    main()
-    
-
-
