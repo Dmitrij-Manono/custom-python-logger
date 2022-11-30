@@ -43,3 +43,168 @@ Traceback (most recent call last):
   File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/test_app.py", line 18, in test_custom_log
     raise Exception("This is a test")
 Exception: This is a test
+2022-11-30 09:33:06|USER_INPUT|   user input    |custom_log.py|main|164|cli_Log|
+2022-11-30 09:33:06|ALERT|   alert    |custom_log.py|main|165|cli_Log|
+2022-11-30 09:33:06|IMPORTANT|   important    |custom_log.py|main|166|cli_Log|
+2022-11-30 09:33:06|ACTION_REQUIRED|   action required    |custom_log.py|main|167|cli_Log|
+2022-11-30 09:33:06|MESSAGE|   message    |custom_log.py|main|168|cli_Log|
+2022-11-30 09:33:06|INFO|   info    |custom_log.py|main|169|cli_Log|
+2022-11-30 09:33:06|DEBUG|   debug    |custom_log.py|main|170|cli_Log|
+2022-11-30 09:33:06|WARNING|   warning    |custom_log.py|main|171|cli_Log|
+2022-11-30 09:33:06|ERROR|   error    |custom_log.py|main|172|cli_Log|
+2022-11-30 09:33:06|CRITICAL|   critical    |custom_log.py|main|173|cli_Log|
+2022-11-30 09:33:06|EXCEPTION|   test    |custom_log.py|main|178|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 176, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:38:39|USER_INPUT|   user input TESTTEST    |custom_log.py|main|155|cli_Log|
+2022-11-30 12:38:39|ALERT|   alert TESTTEST    |custom_log.py|main|156|cli_Log|
+2022-11-30 12:38:39|IMPORTANT|   important TESTTEST    |custom_log.py|main|157|cli_Log|
+2022-11-30 12:38:39|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|158|cli_Log|
+2022-11-30 12:38:39|MESSAGE|   message TESTTEST    |custom_log.py|main|159|cli_Log|
+2022-11-30 12:38:39|INFO|   info TESTTEST    |custom_log.py|main|160|cli_Log|
+2022-11-30 12:38:39|DEBUG|   debug TESTTEST    |custom_log.py|main|161|cli_Log|
+2022-11-30 12:38:39|WARNING|   warning TESTTEST    |custom_log.py|main|162|cli_Log|
+2022-11-30 12:38:39|ERROR|   error TESTTEST    |custom_log.py|main|163|cli_Log|
+2022-11-30 12:38:39|CRITICAL|   critical TESTTEST    |custom_log.py|main|164|cli_Log|
+2022-11-30 12:38:39|EXCEPTION|   test    |custom_log.py|main|169|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 167, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:44:30|USER_INPUT|   user input TESTTEST    |custom_log.py|main|167|cli_Log|
+2022-11-30 12:44:30|ALERT|   alert TESTTEST    |custom_log.py|main|168|cli_Log|
+2022-11-30 12:44:30|IMPORTANT|   important TESTTEST    |custom_log.py|main|169|cli_Log|
+2022-11-30 12:44:30|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|170|cli_Log|
+2022-11-30 12:44:30|MESSAGE|   message TESTTEST    |custom_log.py|main|171|cli_Log|
+2022-11-30 12:44:30|INFO|   info TESTTEST    |custom_log.py|main|172|cli_Log|
+2022-11-30 12:44:30|DEBUG|   debug TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:44:30|WARNING|   warning TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:44:30|ERROR|   error TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:44:30|CRITICAL|   critical TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:44:30|EXCEPTION|   test    |custom_log.py|main|181|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 179, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:45:35|USER_INPUT|   user input TESTTEST    |custom_log.py|main|168|cli_Log|
+2022-11-30 12:45:35|ALERT|   alert TESTTEST    |custom_log.py|main|169|cli_Log|
+2022-11-30 12:45:35|IMPORTANT|   important TESTTEST    |custom_log.py|main|170|cli_Log|
+2022-11-30 12:45:35|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|171|cli_Log|
+2022-11-30 12:45:35|MESSAGE|   message TESTTEST    |custom_log.py|main|172|cli_Log|
+2022-11-30 12:45:35|INFO|   info TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:45:35|DEBUG|   debug TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:45:35|WARNING|   warning TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:45:35|ERROR|   error TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:45:35|CRITICAL|   critical TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:45:35|EXCEPTION|   test    |custom_log.py|main|182|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 180, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:45:59|USER_INPUT|   user input TESTTEST    |custom_log.py|main|168|cli_Log|
+2022-11-30 12:45:59|ALERT|   alert TESTTEST    |custom_log.py|main|169|cli_Log|
+2022-11-30 12:45:59|IMPORTANT|   important TESTTEST    |custom_log.py|main|170|cli_Log|
+2022-11-30 12:45:59|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|171|cli_Log|
+2022-11-30 12:45:59|MESSAGE|   message TESTTEST    |custom_log.py|main|172|cli_Log|
+2022-11-30 12:45:59|INFO|   info TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:45:59|DEBUG|   debug TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:45:59|WARNING|   warning TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:45:59|ERROR|   error TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:45:59|CRITICAL|   critical TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:45:59|EXCEPTION|   test    |custom_log.py|main|182|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 180, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:46:19|USER_INPUT|   user input TESTTEST    |custom_log.py|main|167|cli_Log|
+2022-11-30 12:46:19|ALERT|   alert TESTTEST    |custom_log.py|main|168|cli_Log|
+2022-11-30 12:46:19|IMPORTANT|   important TESTTEST    |custom_log.py|main|169|cli_Log|
+2022-11-30 12:46:19|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|170|cli_Log|
+2022-11-30 12:46:19|MESSAGE|   message TESTTEST    |custom_log.py|main|171|cli_Log|
+2022-11-30 12:46:19|INFO|   info TESTTEST    |custom_log.py|main|172|cli_Log|
+2022-11-30 12:46:19|DEBUG|   debug TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:46:19|WARNING|   warning TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:46:19|ERROR|   error TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:46:19|CRITICAL|   critical TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:46:19|EXCEPTION|   test    |custom_log.py|main|181|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 179, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:47:31|USER_INPUT|   user input TESTTEST    |custom_log.py|main|171|cli_Log|
+2022-11-30 12:47:31|ALERT|   alert TESTTEST    |custom_log.py|main|172|cli_Log|
+2022-11-30 12:47:31|IMPORTANT|   important TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:47:31|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:47:31|MESSAGE|   message TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:47:31|INFO|   info TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:47:31|DEBUG|   debug TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:47:31|WARNING|   warning TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 12:47:31|ERROR|   error TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 12:47:31|CRITICAL|   critical TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 12:47:31|EXCEPTION|   test    |custom_log.py|main|185|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 183, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:48:36|USER_INPUT|   user input TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:48:36|ALERT|   alert TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:48:36|IMPORTANT|   important TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:48:36|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:48:36|MESSAGE|   message TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:48:36|INFO|   info TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 12:48:36|DEBUG|   debug TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 12:48:36|WARNING|   warning TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 12:48:36|ERROR|   error TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 12:48:36|CRITICAL|   critical TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 12:48:36|EXCEPTION|   test    |custom_log.py|main|187|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 185, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:48:40|USER_INPUT|   user input TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:48:40|ALERT|   alert TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:48:40|IMPORTANT|   important TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:48:40|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:48:40|MESSAGE|   message TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:48:40|INFO|   info TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 12:48:40|DEBUG|   debug TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 12:48:40|WARNING|   warning TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 12:48:40|ERROR|   error TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 12:48:40|CRITICAL|   critical TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 12:48:40|EXCEPTION|   test    |custom_log.py|main|187|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 185, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:48:41|USER_INPUT|   user input TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:48:41|ALERT|   alert TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:48:41|IMPORTANT|   important TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:48:41|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:48:41|MESSAGE|   message TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:48:41|INFO|   info TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 12:48:41|DEBUG|   debug TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 12:48:41|WARNING|   warning TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 12:48:41|ERROR|   error TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 12:48:41|CRITICAL|   critical TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 12:48:41|EXCEPTION|   test    |custom_log.py|main|187|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 185, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 12:48:42|USER_INPUT|   user input TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 12:48:42|ALERT|   alert TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 12:48:42|IMPORTANT|   important TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 12:48:42|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 12:48:42|MESSAGE|   message TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 12:48:42|INFO|   info TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 12:48:42|DEBUG|   debug TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 12:48:42|WARNING|   warning TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 12:48:42|ERROR|   error TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 12:48:42|CRITICAL|   critical TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 12:48:42|EXCEPTION|   test    |custom_log.py|main|187|cli_Log|
+Traceback (most recent call last):
+  File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 185, in main
+    raise Exception("test")
+Exception: test

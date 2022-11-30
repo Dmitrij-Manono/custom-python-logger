@@ -98,14 +98,19 @@ class CustomLog(logging.Logger):
         if self.isEnabledFor(logging.WARNING):
             self.handle(self.makeRecord(name=self.log_name, level=logging.WARNING, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
        
-
     def alert(self, message, *args, **kws) -> None:
         if self.isEnabledFor(ALERT_LEVEL_NUM):
+            self.change_stream_log_format()
             self.handle(self.makeRecord(name=self.log_name, level=ALERT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
-    
+            self.change_stream_log_format_to_default()
+            
     def important(self, message, *args, **kws) -> None:
         if self.isEnabledFor(IMPORTANT_LEVEL_NUM):
+            # changes output format for important messages with change_stream_log_format
+            self.change_stream_log_format()
             self.handle(self.makeRecord(name=self.log_name, level=IMPORTANT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            # changes output format back to default
+            self.change_stream_log_format_to_default()
 
     def user_input(self, message, *args, **kws) -> None:
         if self.isEnabledFor(USER_INPUT_LEVEL_NUM):
@@ -113,19 +118,19 @@ class CustomLog(logging.Logger):
 
     def message(self, message, *args, **kws) -> None:
         if self.isEnabledFor(MESSAGE_LEVEL_NUM):
+            self.change_stream_log_format()
             self.handle(self.makeRecord(name=self.log_name, level=MESSAGE_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.change_stream_log_format_to_default()
 
     def action_required(self, message, *args, **kws) -> None:
         if self.isEnabledFor(ACTION_REQUIRED_LEVEL_NUM):
+            self.change_stream_log_format()
             self.handle(self.makeRecord(name=self.log_name, level=ACTION_REQUIRED_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
-        
-    
+            self.change_stream_log_format_to_default()
 
     def handle(self, record):
         super().handle(record)
 
-
-    
     # makeRecord, format, and emit are the only methods that need to be overridden
     # if exception is not None, handle it
     def makeRecord(self, name, level, fn, lno, msg, args, exc_info, func=None, extra=None, exception=None) -> logging.LogRecord:
@@ -133,9 +138,6 @@ class CustomLog(logging.Logger):
         if exception is not None:
             rv.exc_info = exception
         return rv
-
-
-  
 
     # add console handler to the logger
     def add_console_handler(self, log_format=STREAM_LOG_DEFAULT_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES):
@@ -157,20 +159,27 @@ class CustomLog(logging.Logger):
         self.file_handler.setFormatter(logging.Formatter(log_format, time_format))
         self.addHandler(self.file_handler)
 
+    # change stream log format to STREAM_LOG_LESSINFO_FORMAT
+    def change_stream_log_format(self, log_format=STREAM_LOG_LESSINFO_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES):
+        self.stream_handler.setFormatter(coloredlogs.ColoredFormatter(log_format, time_format, field_styles=field_styles, level_styles=level_styles))
+
+    # change stream log format to STREAM_LOG_DEFAULT_FORMAT
+    def change_stream_log_format_to_default(self, log_format=STREAM_LOG_DEFAULT_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES):
+        self.stream_handler.setFormatter(coloredlogs.ColoredFormatter(log_format, time_format, field_styles=field_styles, level_styles=level_styles))
 
 
 def main():
     log = CustomLog()
-    log.user_input("user input")
-    log.alert("alert")
-    log.important("important")
-    log.action_required("action required")
-    log.message("message")
-    log.info("info")
-    log.debug("debug")
-    log.warning("warning")
-    log.error("error")
-    log.critical("critical")
+    log.user_input("user input TESTTEST")
+    log.alert("alert TESTTEST")
+    log.important("important TESTTEST")
+    log.action_required("action required TESTTEST")
+    log.message("message TESTTEST")
+    log.info("info TESTTEST")
+    log.debug("debug TESTTEST")
+    log.warning("warning TESTTEST")
+    log.error("error TESTTEST")
+    log.critical("critical TESTTEST")
 
     try:
         raise Exception("test")
