@@ -208,3 +208,78 @@ Traceback (most recent call last):
   File "/Users/dmitrijs/Desktop/_dima/Projekte/custom_logger/helpers/custom_log.py", line 185, in main
     raise Exception("test")
 Exception: test
+2022-11-30 14:40:48|USER_INPUT|   user input TESTTEST    |custom_log.py|main|173|cli_Log|
+2022-11-30 14:40:48|ALERT|   alert TESTTEST    |custom_log.py|main|174|cli_Log|
+2022-11-30 14:40:48|IMPORTANT|   important TESTTEST    |custom_log.py|main|175|cli_Log|
+2022-11-30 14:40:48|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 14:40:48|MESSAGE|   message TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 14:40:48|INFO|   info TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 14:40:48|DEBUG|   debug TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 14:40:48|WARNING|   warning TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 14:40:48|ERROR|   error TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 14:40:48|CRITICAL|   critical TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 14:40:48|EXCEPTION|   test    |custom_log.py|main|187|cli_Log|
+Traceback (most recent call last):
+  File "g:\_Manono_USER\Manono\Desktop\git\custom_logger_python\helpers\custom_log.py", line 185, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 16:40:30|USER_INPUT|   user input TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 16:40:30|ALERT|   alert TESTTEST    |custom_log.py|main|183|cli_Log|
+2022-11-30 16:40:30|IMPORTANT|   important TESTTEST    |custom_log.py|main|184|cli_Log|
+2022-11-30 16:40:30|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|185|cli_Log|
+2022-11-30 16:40:30|MESSAGE|   message TESTTEST    |custom_log.py|main|186|cli_Log|
+2022-11-30 16:40:30|INFO|   info TESTTEST    |custom_log.py|main|187|cli_Log|
+2022-11-30 16:40:30|DEBUG|   debug TESTTEST    |custom_log.py|main|188|cli_Log|
+2022-11-30 16:40:30|WARNING|   warning TESTTEST    |custom_log.py|main|189|cli_Log|
+2022-11-30 16:40:30|ERROR|   error TESTTEST    |custom_log.py|main|190|cli_Log|
+2022-11-30 16:40:30|CRITICAL|   critical TESTTEST    |custom_log.py|main|191|cli_Log|
+2022-11-30 16:40:30|EXCEPTION|   test    |custom_log.py|main|196|cli_Log|
+Traceback (most recent call last):
+  File "g:\_Manono_USER\Manono\Desktop\git\custom_logger_python\helpers\custom_log.py", line 194, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 16:43:13|USER_INPUT|   user input TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 16:43:13|ALERT|   alert TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 16:43:13|IMPORTANT|   important TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 16:43:13|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 16:43:13|MESSAGE|   message TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 16:43:13|INFO|   info TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 16:43:13|DEBUG|   debug TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 16:43:13|WARNING|   warning TESTTEST    |custom_log.py|main|183|cli_Log|
+2022-11-30 16:43:13|ERROR|   error TESTTEST    |custom_log.py|main|184|cli_Log|
+2022-11-30 16:43:13|CRITICAL|   critical TESTTEST    |custom_log.py|main|185|cli_Log|
+2022-11-30 16:43:13|EXCEPTION|   test    |custom_log.py|main|190|cli_Log|
+Traceback (most recent call last):
+  File "g:\_Manono_USER\Manono\Desktop\git\custom_logger_python\helpers\custom_log.py", line 188, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 16:43:48|USER_INPUT|   user input TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 16:43:48|ALERT|   alert TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 16:43:48|IMPORTANT|   important TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 16:43:48|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 16:43:48|MESSAGE|   message TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 16:43:48|INFO|   info TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 16:43:48|DEBUG|   debug TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 16:43:48|WARNING|   warning TESTTEST    |custom_log.py|main|183|cli_Log|
+2022-11-30 16:43:48|ERROR|   error TESTTEST    |custom_log.py|main|184|cli_Log|
+2022-11-30 16:43:48|CRITICAL|   critical TESTTEST    |custom_log.py|main|185|cli_Log|
+2022-11-30 16:43:48|EXCEPTION|   test    |custom_log.py|main|190|cli_Log|
+Traceback (most recent call last):
+  File "g:\_Manono_USER\Manono\Desktop\git\custom_logger_python\helpers\custom_log.py", line 188, in main
+    raise Exception("test")
+Exception: test
+2022-11-30 16:44:25|USER_INPUT|   user input TESTTEST    |custom_log.py|main|176|cli_Log|
+2022-11-30 16:44:25|ALERT|   alert TESTTEST    |custom_log.py|main|177|cli_Log|
+2022-11-30 16:44:25|IMPORTANT|   important TESTTEST    |custom_log.py|main|178|cli_Log|
+2022-11-30 16:44:25|ACTION_REQUIRED|   action required TESTTEST    |custom_log.py|main|179|cli_Log|
+2022-11-30 16:44:25|MESSAGE|   message TESTTEST    |custom_log.py|main|180|cli_Log|
+2022-11-30 16:44:25|INFO|   info TESTTEST    |custom_log.py|main|181|cli_Log|
+2022-11-30 16:44:25|DEBUG|   debug TESTTEST    |custom_log.py|main|182|cli_Log|
+2022-11-30 16:44:25|WARNING|   warning TESTTEST    |custom_log.py|main|183|cli_Log|
+2022-11-30 16:44:25|ERROR|   error TESTTEST    |custom_log.py|main|184|cli_Log|
+2022-11-30 16:44:25|CRITICAL|   critical TESTTEST    |custom_log.py|main|185|cli_Log|
+2022-11-30 16:44:25|EXCEPTION|   test    |custom_log.py|main|190|cli_Log|
+Traceback (most recent call last):
+  File "g:\_Manono_USER\Manono\Desktop\git\custom_logger_python\helpers\custom_log.py", line 188, in main
+    raise Exception("test")
+Exception: test

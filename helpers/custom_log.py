@@ -11,11 +11,9 @@ STREAM_DEFAULT_LOG_LEVEL = logging.DEBUG
 STREAM_DEFAULT_LOG_NAME = "cli_Log"
 #DEFAULT FIELD STYLES
 STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 127}, 'name': {'color': 'black'}, 'levelname': {'color': 180, 'bold': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'black', 'bold': True}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'black'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
-# FIELD STYLES FOR ALERT LEVEL
-STREAM_ALERT_FIELD_STYLES = {'lineno': {'color': 'red'}, 'name': {'color': 'black'}, 'levelname': {'color': 'black', 'bold': True, 'bright': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'green'}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'blue'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
 # DEFAULT LEVEL STYLES
-STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 166, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'user_input': {'color': 200, 'bold': True}, 'message': {'bold': True}, 'action_required': {'color': 99, 'bold': True}}
+STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 202, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'user_input': {'color': 200, 'bold': True}, 'message': {'bold': True}, 'action_required': {'color': 129, 'bold': True}}
 # DEFAULT COMSOLE LOG FORMAT
 STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s   |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 # FORMAT FOR ALERT LEVEL
@@ -31,13 +29,18 @@ DEFAULT_FILE_LOG_LEVEL = logging.DEBUG
 DEFAULT_FILE_LOG_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s    |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 DEFAULT_FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-
+# DEBUG = 10
 USER_INPUT_LEVEL_NUM = 15
+# INFO = 20
 ALERT_LEVEL_NUM = 25
+# WARNING = 30
 IMPORTANT_LEVEL_NUM = 35
+# ERROR = 40
+EXCEPTION_LEVEL_NUM = 45
+# CRITICAL = 50
 ACTION_REQUIRED_LEVEL_NUM = 150
 MESSAGE_LEVEL_NUM = 200
-EXCEPTION_LEVEL_NUM = 55
+
 
 # Custom Log Class, which will be used to create custom loggers, which can be used in the other modules
 # Has custom log levels, custom log levels can be added as per the requirement
