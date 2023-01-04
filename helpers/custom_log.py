@@ -13,7 +13,7 @@ STREAM_DEFAULT_LOG_NAME = "cli_Log"
 STREAM_DEFAULT_FIELD_STYLES = {'lineno': {'color': 127}, 'name': {'color': 'black'}, 'levelname': {'color': 180, 'bold': True},'funcName': {'color': 'black'}, 'asctime': {'color': 'black', 'bold': True}, 'message': {'color': 'white'}, 'filename': {'color': 'black'},'module': {'color': 'black'}, 'relativeCreated': {'color': 'green'}, 'msecs': {'color': 'green'}}
 
 # DEFAULT LEVEL STYLES
-STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 202, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'user_input': {'color': 200, 'bold': True}, 'message': {'bold': True}, 'action_required': {'color': 129, 'bold': True}}
+STREAM_DEFAULT_LEVEL_STYLES = {'info': {'color': 'green', 'bold': False}, 'warning': {'color': 'yellow', 'bold': True}, 'error': {'color': 196, 'bold': False}, 'debug': {'color': 27,'bald': True}, 'critical': {'color': 'white', 'bold': True, 'background': 'red'},'exception': {'color': 196, 'bold': True}, 'alert': {'color': 202, 'bold': True}, 'important': {'color': 40, 'bold': True}, 'user_input': {'color': 200, 'bold': True}, 'message': {'bold': True}, 'action_required': {'color': 129, 'bold': True}, 'result': {'color': 31, 'bold': True}}
 # DEFAULT COMSOLE LOG FORMAT
 STREAM_LOG_DEFAULT_FORMAT = '|%(asctime)s|%(levelname)s|   %(message)s   |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 # FORMAT FOR ALERT LEVEL
@@ -29,6 +29,8 @@ DEFAULT_FILE_LOG_LEVEL = logging.DEBUG
 DEFAULT_FILE_LOG_FORMAT = '%(asctime)s|%(levelname)s|   %(message)s    |%(filename)s|%(funcName)s|%(lineno)d|%(name)s|' #%(module)s|
 DEFAULT_FILE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
+# RESULT 10
+RESULT_LEVEL_NUM = 11
 # DEBUG = 10
 USER_INPUT_LEVEL_NUM = 15
 # INFO = 20
@@ -44,7 +46,7 @@ MESSAGE_LEVEL_NUM = 200
 
 # Custom Log Class, which will be used to create custom loggers, which can be used in the other modules
 # Has custom log levels, custom log levels can be added as per the requirement
-class CustomLog(logging.Logger):
+class CustomLogger(logging.Logger):
     def __init__(self, name=STREAM_DEFAULT_LOG_NAME, level=STREAM_DEFAULT_LOG_LEVEL, log_format=STREAM_LOG_DEFAULT_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES):
         super().__init__(name, level)
         self.log_name = name
@@ -64,12 +66,14 @@ class CustomLog(logging.Logger):
 
     
     def add_custom_log_levels(self):
+        logging.addLevelName(RESULT_LEVEL_NUM, "RESULT")
         logging.addLevelName(USER_INPUT_LEVEL_NUM, "USER_INPUT")
         logging.addLevelName(ALERT_LEVEL_NUM, "ALERT")
         logging.addLevelName(IMPORTANT_LEVEL_NUM, "IMPORTANT")
         logging.addLevelName(ACTION_REQUIRED_LEVEL_NUM, "ACTION_REQUIRED")
         logging.addLevelName(MESSAGE_LEVEL_NUM, "MESSAGE")
         logging.addLevelName(EXCEPTION_LEVEL_NUM, "EXCEPTION")
+        logging.Logger.result = self.result
         logging.Logger.user_input = self.user_input
         logging.Logger.alert = self.alert
         logging.Logger.important = self.important
@@ -77,58 +81,64 @@ class CustomLog(logging.Logger):
         logging.Logger.message = self.message
         logging.Logger.exception = self.exception
 
-    def info(self, message, *args, **kws) -> None:
+    def info(self, message) -> None:
         if self.isEnabledFor(logging.INFO):
-            self.handle(self.makeRecord(name=self.log_name, level=logging.INFO, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=logging.INFO, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
     
-    def debug(self, message, *args, **kws) -> None:
+    def debug(self, message) -> None:
         if self.isEnabledFor(logging.DEBUG):
-            self.handle(self.makeRecord(name=self.log_name, level=logging.DEBUG, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=logging.DEBUG, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
 
-    def error(self, message, *args, **kws) -> None:
+    def result(self, message) -> None:
+        if self.isEnabledFor(RESULT_LEVEL_NUM):
+            self.change_stream_log_format()
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=RESULT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
+            self.change_stream_log_format_to_default()
+
+    def error(self, message) -> None:
         if self.isEnabledFor(logging.ERROR):
-            self.handle(self.makeRecord(name=self.log_name, level=logging.ERROR, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=logging.ERROR, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
 
-    def critical(self, message, *args, **kws) -> None:
+    def critical(self, message) -> None:
         if self.isEnabledFor(logging.CRITICAL):
-            self.handle(self.makeRecord(name=self.log_name, level=logging.CRITICAL, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=logging.CRITICAL, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
 
-    def exception(self, message, *args, **kws) -> None:
+    def exception(self, message) -> None:
         if self.isEnabledFor(EXCEPTION_LEVEL_NUM):
-            self.handle(self.makeRecord(name=self.log_name, level=EXCEPTION_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3], exception=sys.exc_info()))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=EXCEPTION_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3], exception=sys.exc_info()))
     
-    def warning(self, message, *args, **kws) -> None:
+    def warning(self, message) -> None:
         if self.isEnabledFor(logging.WARNING):
-            self.handle(self.makeRecord(name=self.log_name, level=logging.WARNING, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=logging.WARNING, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
        
-    def alert(self, message, *args, **kws) -> None:
+    def alert(self, message) -> None:
         if self.isEnabledFor(ALERT_LEVEL_NUM):
             self.change_stream_log_format()
-            self.handle(self.makeRecord(name=self.log_name, level=ALERT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=ALERT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
             self.change_stream_log_format_to_default()
             
-    def important(self, message, *args, **kws) -> None:
+    def important(self, message) -> None:
         if self.isEnabledFor(IMPORTANT_LEVEL_NUM):
             # changes output format for important messages with change_stream_log_format
             self.change_stream_log_format()
-            self.handle(self.makeRecord(name=self.log_name, level=IMPORTANT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=IMPORTANT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
             # changes output format back to default
             self.change_stream_log_format_to_default()
 
-    def user_input(self, message, *args, **kws) -> None:
+    def user_input(self, message) -> None:
         if self.isEnabledFor(USER_INPUT_LEVEL_NUM):
-            self.handle(self.makeRecord(name=self.log_name, level=USER_INPUT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=USER_INPUT_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
 
-    def message(self, message, *args, **kws) -> None:
+    def message(self, message) -> None:
         if self.isEnabledFor(MESSAGE_LEVEL_NUM):
             self.change_stream_log_format()
-            self.handle(self.makeRecord(name=self.log_name, level=MESSAGE_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=MESSAGE_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
             self.change_stream_log_format_to_default()
 
-    def action_required(self, message, *args, **kws) -> None:
+    def action_required(self, message) -> None:
         if self.isEnabledFor(ACTION_REQUIRED_LEVEL_NUM):
             self.change_stream_log_format()
-            self.handle(self.makeRecord(name=self.log_name, level=ACTION_REQUIRED_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, args=args, exc_info=None, func=inspect.stack()[1][3]))
+            self.handle(self.makeRecord(args=None, name=self.log_name, level=ACTION_REQUIRED_LEVEL_NUM, fn=inspect.stack()[1][1], lno=inspect.stack()[1][2], msg=message, exc_info=None, func=inspect.stack()[1][3]))
             self.change_stream_log_format_to_default()
 
     def handle(self, record):
@@ -170,9 +180,19 @@ class CustomLog(logging.Logger):
     def change_stream_log_format_to_default(self, log_format=STREAM_LOG_DEFAULT_FORMAT, time_format=STREAM_DEFAULT_TIME_FORMAT, field_styles=STREAM_DEFAULT_FIELD_STYLES, level_styles=STREAM_DEFAULT_LEVEL_STYLES):
         self.stream_handler.setFormatter(coloredlogs.ColoredFormatter(log_format, time_format, field_styles=field_styles, level_styles=level_styles))
 
+    # set log level for file handler and stream handler for all created loggers
+    def set_log_level(self, level):
+        self.setLevel(level)
+        self.file_handler.setLevel(level)
+        self.stream_handler.setLevel(level)
+    
+    
+        
+
 
 def main():
-    log = CustomLog()
+    log = CustomLogger()
+    log.set_log_level(logging.INFO)
     log.user_input("user input TESTTEST")
     log.alert("alert TESTTEST")
     log.important("important TESTTEST")
@@ -183,6 +203,7 @@ def main():
     log.warning("warning TESTTEST")
     log.error("error TESTTEST")
     log.critical("critical TESTTEST")
+    log.result("result TESTTEST")
 
     try:
         raise Exception("test")
